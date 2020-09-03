@@ -1,0 +1,40 @@
+﻿using Brickweave.Cqrs.Cli;
+using Brickweave.Cqrs.Cli.Formatters;
+using Brickweave.Cqrs.Cli.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace BasicCqrs.WebApp.Controllers
+{
+    /// <summary>
+    /// This is the controller that will handle CLI access for the demo CLI client 
+    /// (/scripts/cli-client-nosecurity.ps1).
+    /// </summary>
+    public class CliController : Controller
+    {
+        private readonly ICliDispatcher _cliDispatcher;
+
+        public CliController(ICliDispatcher cliDispatcher)
+        {
+            _cliDispatcher = cliDispatcher;
+        }
+
+        [HttpPost, Route("/cli/run")]
+        public async Task<IActionResult> RunAsync([FromBody] string commandText)
+        {
+            // Additional steps required to setup your own application for the CLI dispatcher: 
+            // 1. Add an XML documentation file to your domain libraries (see documentation for instructions)
+            // 2. Disable compiler warnings for missing-documentation (codes 1701, 1702, and 1591) to prevent 
+            // Visual Studio from warning that documentation is missing from all constructors and methods
+            // 3. Create a JSON file to provide help documentation for your domain models (e.g. cli-categories.json 
+            // in this demo).
+
+            var result = await _cliDispatcher.DispatchAsync(commandText);
+
+            var value = result is HelpInfo info
+                ? SimpleHelpFormatter.Format(info) : result;
+
+            return Ok(value);
+        }
+    }
+}
