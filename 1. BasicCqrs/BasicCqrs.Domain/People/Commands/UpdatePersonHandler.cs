@@ -1,7 +1,7 @@
-﻿using BasicCqrs.Domain.People.Models;
+﻿using System.Threading.Tasks;
+using BasicCqrs.Domain.People.Models;
 using BasicCqrs.Domain.People.Services;
 using Brickweave.Cqrs;
-using System.Threading.Tasks;
 
 namespace BasicCqrs.Domain.People.Commands
 {
@@ -18,10 +18,10 @@ namespace BasicCqrs.Domain.People.Commands
         {
             var person = await personRepository.GetPersonAsync(command.Id);
 
-            if(command.FirstName != null)
+            if (command.FirstName != null)
                 person.FirstName = command.FirstName;
 
-            if(command.LastName != null)
+            if (command.LastName != null)
                 person.LastName = command.LastName;
 
             await personRepository.SavePersonAsync(person);

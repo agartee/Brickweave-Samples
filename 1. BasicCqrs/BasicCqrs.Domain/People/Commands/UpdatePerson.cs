@@ -15,7 +15,7 @@ namespace BasicCqrs.Domain.People.Commands
         public UpdatePerson(PersonId id, string firstName, string lastName)
         {
             Guard.AgainstNullArgument(nameof(id), id);
-            
+
             Id = id;
             FirstName = firstName;
             LastName = lastName;

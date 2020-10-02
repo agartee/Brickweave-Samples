@@ -1,7 +1,7 @@
-﻿using BasicCqrs.Domain.People.Models;
+﻿using System.Threading.Tasks;
+using BasicCqrs.Domain.People.Models;
 using BasicCqrs.Domain.People.Services;
 using Brickweave.Cqrs;
-using System.Threading.Tasks;
 
 namespace BasicCqrs.Domain.People.Commands
 {
