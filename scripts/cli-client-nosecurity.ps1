@@ -187,10 +187,6 @@ function DisplayGenericExceptionMessage {
 $args = FilterArgsAndLoadScriptSettings($args)
 LoadConfiguration($MyInvocation.MyCommand.Name)
 
-if($null -eq $global:token) {
-    Login
-}
-
 try {
     $result = ExecuteCommand($args)
     return $result.Content

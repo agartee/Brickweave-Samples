@@ -5,7 +5,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about building application with Brickweave <a href="https://github.com/agartee/Brickweave-Samples">here</a>.</p>
+    <p>Learn about building application with Brickweave <a href="https://github.com/agartee/Brickweave">here</a>.</p>
 </div>
 
 <p>
@@ -15,19 +15,18 @@
 </p>
 
 <p>
-    There is also a demo CLI client PowerShell script included at <b>./src/cli-client-nosecurity.ps1</b>. Running the client
-    for the first time will prompt for the API endpoint (https://localhost:5001/cli/run) and then save that information for
-    all future executions.
+    There is also a demo CLI client (PowerShell script) included at <b>./src/cli-client-nosecurity.ps1</b>. Running the client
+    for the first time will prompt for an API endpoint (in this case https://localhost:5001/cli/run) and then save that 
+    information for all future executions in a config file.
 </p>
 
 <p>
-    Most of the commands and queries in this demo are auto-discoverable by the Brickweave.Cqrs.Cli service configuration calls
-    in this web application's Startup.cs/ConfigureServices section. Make note that the "ListPeople" query is overridden from
-    it's default CLI command name.
+    Please ignore the fact that no authentication/authorization takes place in this demo for either the web application or the 
+    CLI. Future demos will include Auth0 OAuth2.
 </p>
 
 <p>
-    Try some of these commands from the PowerShell command prompt:
+    While you're playing around with this demo, pelase try some of these commands from the PowerShell command prompt:
 </p>
 
 <code>./scripts/cli-client-nosecurity.ps1 --help</code>
