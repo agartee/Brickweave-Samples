@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq;
 using BasicCqrs.Domain.People.Models;
@@ -40,18 +40,26 @@ namespace BasicCqrs.WebApp
                     // Use a System.Text.Json coverter to write Id (e.g. PersonId) value objects as their root values. 
                     // This will really only be used by the CLI in this demo, we the web application does this 
                     // conversion in the view models for Razor page consumption.
-                    config.JsonSerializerOptions.Converters.Add(new IdConverter<PersonId>());
+                    config.JsonSerializerOptions.Converters.Add(new FlatIdConverter<PersonId>());
                 });
 
-            // Wire-up Brickweave library services
+            // Brickweave supports wiring up multiple domain libraries. Simply assemble all of the libraries you want
+            // to include into an array and pass that array to the IServiceCollection extensions methods below.
             var domainAssemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => a.FullName.Contains("BasicCqrs.Domain"))
                 .ToArray();
+
+            // Registers common CQRS services (e.g. IDispatcher) as well as the command handlers found in the provided
+            // domain assemblies collection.
             services.AddCqrs(domainAssemblies);
+
+            // Registers CLI services that are used to translate command text (with args) as well as providing a hook 
+            // for additional application customizations (e.g. date parsing). Here you may also override CLI command 
+            // text for specific commands and/or queries.
             services.AddCli(domainAssemblies)
                 .AddDateParsingCulture(new CultureInfo("en-US"))
-                .AddCategoryHelpFile("cli-categories.json") // the file containing help documentation for domain model "categories"
-                .OverrideQueryName<ListPeople>("list", "person"); // override the auto-discovered CLI command named "people list" to "person list"
+                .AddCategoryHelpFile("cli-categories.json") // the file containing help documentation for domain model "categories" (domain model type, not a specific action)
+                .OverrideQueryName<ListPeople>("list", "person"); // here we can override the auto-discovered CLI command named "people list" to "person list"
 
             // Register your application's domain services
             services.AddSingleton<IPersonRepository, DummyPersonRepository>();

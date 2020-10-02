@@ -1,6 +1,6 @@
-﻿using BasicCqrs.WebApp.Models;
+﻿using System.Diagnostics;
+using BasicCqrs.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace BasicCqrs.WebApp.Controllers
 {

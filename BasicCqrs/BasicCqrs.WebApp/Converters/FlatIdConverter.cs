@@ -1,7 +1,7 @@
-﻿using Brickweave.Domain;
-using System;
+﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Brickweave.Domain;
 
 namespace BasicCqrs.WebApp.Converters
 {
@@ -11,7 +11,7 @@ namespace BasicCqrs.WebApp.Converters
     /// of domain models.
     /// </summary>
     /// <typeparam name="T">The Brickweave.Domain.Id implementation class</typeparam>
-    public class IdConverter<T> : JsonConverter<T> where T : Id<Guid>
+    public class FlatIdConverter<T> : JsonConverter<T> where T : Id<Guid>
     {
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

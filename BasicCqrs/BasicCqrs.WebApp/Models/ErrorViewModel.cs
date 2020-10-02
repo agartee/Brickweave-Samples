@@ -1,5 +1,3 @@
-using System;
-
 namespace BasicCqrs.WebApp.Models
 {
     public class ErrorViewModel

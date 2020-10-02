@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace BasicCqrs.WebApp.Formatters
 {
@@ -18,7 +18,7 @@ namespace BasicCqrs.WebApp.Formatters
             SupportedEncodings.Add(UTF16EncodingLittleEndian);
         }
 
-        public async override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, 
+        public async override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context,
             Encoding encoding)
         {
             var httpContext = context.HttpContext;
